@@ -16,11 +16,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *      "pagination_enabled" = true
  * },
- *  subresourceOperations = {
- *      "api_users_style_get_subresource" = {
- *              "normalization_context" = {"groups"= {"style_subresource"}, "enable_max_depth" = true}
- *   },
- * },
  *  normalizationContext ={"groups" = {"style_read", "user_read"}}
  * )
  */
@@ -37,13 +32,13 @@ class Style
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user_read", "instrument_read", "style_read"})
+     * @Groups({"user_read", "style_read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style",cascade={"persist"})
-     * @Groups({ "instrument_read", "style_read"})
+     * @Groups({ "style_read", "user_read"})
      */
     private $user;
 
@@ -78,4 +73,19 @@ class Style
         return $this->user;
     }
 
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function __toString() {
+        return (string) $this->getName();
+    }
 }

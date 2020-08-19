@@ -19,10 +19,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * },
  *  collectionOperations={"GET", "POST"},
  *  itemOperations={"GET", "PUT"},
- *  subresourceOperations={
- *  "force_eager"=false,
- *      "style_get_subresource"={"path"="/users/{id}/style"}
- *  },
  *  normalizationContext={
  *      "groups"={"user_read", "style_read"},"enable_max_depth" = true,
  *  }
@@ -35,6 +31,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"user_read", "instrument_read", "style_read"})
      */
     private $id;
 
@@ -81,7 +78,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user")
-     * @Groups({ "instrument_read"})
+     * @Groups({"instrument_read"})
      */
     private $style;
 
@@ -237,7 +234,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Style[]
+     * @return Collection|Instrument[]
      */
     public function getStyle(): Collection
     {

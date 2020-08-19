@@ -62,7 +62,25 @@ class AppFixtures extends Fixture
                 ->setCity($faker->city)
                 ->setPassword($hash)
                 ->setEmail($faker->email);
-     
+
+                /*
+                // je tente d'avoir aleatoirement 1 a 5 styles par user
+                for($s = 0; $s <  mt_rand(1, 5); $s++){
+                    $style = new Style();
+                    $style->setName($faker->randomElement( $styleCat));
+                    $user->addStyle($this->$style->getName());
+                    $manager->persist($style);
+                }
+
+                 // je tente d'avoir aleatoirement 1 a 5 instruments par user
+                 for($i = 0; $i <  mt_rand(1, 5); $i++){
+                    $instrument = new Instrument();
+                    $instrument->setName($faker->randomElement( $instrumentCat));
+                    $user->addInstrument($this->instrument->getName());
+                    $manager->persist($instrument);
+                }
+     */
+                
                 foreach ($styleCategories as $styleCategory) {
                     $user->getStyle($styleCategories)->add($styleCategory);
                 }

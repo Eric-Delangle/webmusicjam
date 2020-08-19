@@ -1,16 +1,22 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import AuthContext from "../contexts/AuthContext";
+import AuthApi from "../services/AuthApi";
+import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 
-const Navbar = (props) => {
+const Navbar = ({history}) => {
 
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+
+   
+console.log(isAuthenticated);
 
     const handleLogout = () => {
         AuthApi.logout();
         setIsAuthenticated(false);
         toast.info("Vous êtes desormais déconnecté(e) ");
-        // history.push("/login");
+         history.push("/login");
     };
 
     return (
@@ -34,7 +40,7 @@ const Navbar = (props) => {
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">
-                        {(!isAuthenticated && (
+                        { ( !isAuthenticated && (
                             <>
                                 <li className="nav-item">
                                     <NavLink to="/register" className="btn btn-primary">Inscription</NavLink>

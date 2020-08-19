@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StylesApi from '../services/StylesApi';
 import Pagination from "../components/Pagination";
+import { Link  } from 'react-router-dom';
+
 
 
 const StylesPage = (props) => {
@@ -39,44 +41,48 @@ const StylesPage = (props) => {
         itemsPerPage
     ) : styles;
 
+// stocker l'id d'un membre pour voir son profil
+
+//const userId =() =>  window.localStorage.setItem("id", item.id);
+
     return (
         <>
             {paginatedFullStyles.map(style => (
+
                 <div className="container mt-0 bg-primary " key={style.id}>
                     <table className="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Style</th>
                                 <th scope="col">Membre</th>
-                                <th scope="col">Instrument(s)</th>
                                 <th scope="col">Ville</th>
+                                <th scope="col">Instrument(s)</th>
                                 <th scope="col"></th>
-
                             </tr>
                         </thead>
-
                         <tbody>
                             {style.user && style.user.map(item => (
+                               
                                 <tr className="table-primary">
 
                                     <th>{style.name}</th>
-
-
-
                                     <td >{item.firstName} {item.lastName}</td>
-                                    <td>{style.user.instrument && style.user.instrument.map(instru => (
-                                        <p>{instru.name}</p>
-
-                                    ))}</td>
-
                                     <td>{item.city}</td>
-                                    <td><button className="btn btn-sm btn-info">Profil</button></td>
+
+                                    {item.instrument && item.instrument.map(instru =>
+                                        <td key={style.id}>
+                                            {instru.name}
+                                        </td>
+                                        
+                                    )}
+
+                                    <td>
+                                        <Link to={"/users/" + item.id} onClick={() =>  window.localStorage.setItem("id", item.id)} className="btn btn-sm btn-info">
+                                            Profil
+                                    </Link></td>
                                 </tr>
-
                             ))}
-
                         </tbody>
-
                     </table>
                 </div>
             ))}
