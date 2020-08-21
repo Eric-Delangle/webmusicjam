@@ -16,7 +16,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *      "pagination_enabled" = true
  * },
- *  normalizationContext ={"groups" = {"style_read", "user_read"}}
+ *  collectionOperations={"GET", "POST"},
+ *  itemOperations={"GET", "PUT"},
+ *  normalizationContext ={
+ *      "groups" = {"style_read", "user_read"},"enable_max_depth" = true,
+ * }
  * )
  */
 
@@ -27,18 +31,18 @@ class Style
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({ "user_read", "instrument_read", "style_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user_read", "style_read"})
+     *  @Groups({ "user_read", "instrument_read", "style_read"})
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="style",cascade={"persist"})
-     * @Groups({ "style_read", "user_read"})
      */
     private $user;
 

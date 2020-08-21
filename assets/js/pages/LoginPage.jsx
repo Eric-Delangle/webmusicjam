@@ -26,10 +26,9 @@ const LoginPage = ({ history }) => {
        try {
            await AuthApi.authenticate(credentials);
            setError("");
-           console.log(setIsAuthenticated);
            setIsAuthenticated(true);
            toast.success("Vous êtes desormais connecté(e) !")
-           history.replace("/styles");
+           history.replace("/member");
            } catch(error) {
            setError("Aucun compte ne possède cette adresse ou alors les informations ne correspondent pas.");
            toast.error("Une erreur est survenue !");

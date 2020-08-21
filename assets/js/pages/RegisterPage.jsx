@@ -47,8 +47,8 @@ const RegisterPage = ({ history }) => {
 
     // Gestion des changements des inputs dans le formulaire.
     const handleChange = ({ currentTarget }) => {
-        const { options, value } = currentTarget;
-        setUser({ ...user, [options]: value });
+        const { name, value } = currentTarget;
+        setUser({ ...user, [name]: value });
     };
 
     // Gestion de la soumission de l'utilisateur.
@@ -88,7 +88,7 @@ const RegisterPage = ({ history }) => {
     return (
         <>
             <h1>Inscription</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
                 <Field
                     name="firstName"
                     label="Prénom"
@@ -140,10 +140,11 @@ const RegisterPage = ({ history }) => {
                     value={user.passwordConfirm}
                     onChange={handleChange}
                 />
+          
                 <FieldList
-                    className="noir"
                     name="style"
                     label="Style"
+                    type= "checkbox"
                     options={optionsStyles}
                     placeholder="Votre style"
                     error={errors.style}
@@ -151,15 +152,16 @@ const RegisterPage = ({ history }) => {
                     onChange={handleChange}
                 />
                 <FieldList
-                    className="noir"
                     name="instrument"
                     label="Instrument"
+                    type= "checkbox"
                     options={optionsInstrus}
                     placeholder="Votre instrument"
                     error={errors.instrument}
                     value={user.instrument}
                     onChange={handleChange}
                 />
+              
                 <br />
                 <div className="form-group">
                     <button type="submit" className="btn btn-success">

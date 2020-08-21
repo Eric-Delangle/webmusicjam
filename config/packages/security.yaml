@@ -19,6 +19,19 @@ security:
             stateless: true
             anonymous: true
             methods: [POST]
+
+            # la je dis que tout ce qui commencera par /api/styles sera accessible sans token
+        styles:
+            pattern: ^/api/styles
+            stateless: true
+            anonymous: true 
+
+            # la je dis que tout ce qui commencera par /api/users sera accessible sans token
+        users:
+            pattern: ^/api/users
+            stateless: true
+            anonymous: true  
+
         login:
             pattern: ^/api/login
             stateless: true
@@ -51,6 +64,7 @@ security:
        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY } 
        - { path: ^/api/styles, roles: IS_AUTHENTICATED_ANONYMOUSLY } 
        - { path: ^/api/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+ 
      #  - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY , methods: [GET, PUT, DELETE]}
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

@@ -7,15 +7,15 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
  /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ApiResource(
  * attributes={
- *      "pagination_enabled" = true
+ *      "pagination_enabled" = false
  * },
  *  collectionOperations={"GET", "POST"},
  *  itemOperations={"GET", "PUT"},
@@ -72,15 +72,15 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user")
-     * @Groups({"user_read", "instrument_read", "style_read"})
+     * @Groups({ "style_read"})
      */
     private $instrument;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user")
-     * @Groups({"instrument_read"})
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" )
+     * @Groups({"style_read"})
      */
-    private $style;
+    private $style ;
 
     public function __construct()
     {
@@ -202,7 +202,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
+   /**
      * @return Collection|Instrument[]
      */
     public function getInstrument(): Collection
@@ -233,8 +233,8 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Instrument[]
+/**
+     * @return Collection|Style[]
      */
     public function getStyle(): Collection
     {
