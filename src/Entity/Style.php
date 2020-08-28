@@ -20,7 +20,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={"GET", "PUT"},
  *  normalizationContext ={
  *      "groups" = {"style_read", "user_read"},"enable_max_depth" = true,
- * }
+ * },
+ * denormalizationContext={"groups"={"style_read", "user_read"}},
  * )
  */
 

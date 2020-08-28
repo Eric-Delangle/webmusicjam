@@ -37,6 +37,7 @@ const MemberPage = (props) => {
     }, [id]);
 
     console.log(user)
+    console.log(user.styles)
     return (
         <>
 
@@ -51,15 +52,16 @@ const MemberPage = (props) => {
                         <th scope="col">Prenom</th>
                         <th scope="col">Ville</th>
                         <th scope="col">Email</th>
+                        <th scope="col"className="text-center" >Année(s) de pratique</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <tr className="table-primary">
-                        {user.style && user.style.map(item=>
+                        {user.styles && user.styles.map(item=>
                             <td key={item.id}>{item.name}</td>
                         )}
-                          {user.instrument&& user.instrument.map(item=>
+                          {user.instruments&& user.instruments.map(item=>
                             <td key={item.id}>{item.name}</td>
                         )}
                         
@@ -67,6 +69,7 @@ const MemberPage = (props) => {
                         <td>{user.firstName}</td>
                         <td>{user.city}</td>
                         <td>{user.email}</td>
+                        <td className="text-center">{user.experience}</td>
                     </tr>
 
                 </tbody>

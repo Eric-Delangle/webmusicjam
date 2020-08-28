@@ -1,20 +1,18 @@
 import React from 'react';
-import Select from 'react-select';
 
-const FieldList = ({ name, label, value, onChange, options, placeholder = "", type = "text ", error = "" }) => (
-<div className="form-group">
-    <Select
-        value={value}
-        name={name}
-        label={label}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        options={options}
-    />
-    </div>
+const FieldList = ({ options,  name, label, onChange, value, error="" }) => (
+  <div className="form-group">
+    <label>
+      {label}
+      <br/>
+      <br/>
+    <select options={options} value= {value} onChange={onChange}  multiple>
+      <option  options={options}  value={value}></option>
+    </select>
+    {error && <p className="invalid-feedback">{ error }</p>}
+    </label>
+  </div>
 );
 
 
 export default FieldList;
-

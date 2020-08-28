@@ -20,8 +20,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *  collectionOperations={"GET", "POST"},
  *  itemOperations={"GET", "PUT"},
  *  normalizationContext={
- *      "groups"={"user_read", "style_read"},"enable_max_depth" = true,
- *  }
+ *      "groups"={"user_read", "style_read", "instrument_read"},"enable_max_depth" = true,
+ *  },
+ * denormalizationContext={"groups"={"style_read", "user_read"}},
  * )
  */
 
@@ -71,21 +72,28 @@ class User implements UserInterface
     private $city;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user")
-     * @Groups({ "style_read"})
+     * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user",cascade={"persist"})
+     * @Groups({ "style_read","user_read" })
      */
-    private $instrument;
+    private $instruments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" )
-     * @Groups({"style_read"})
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" ,cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     * @Groups({"style_read","user_read" })
      */
-    private $style ;
+    private $styles ;
+
+    /**
+     *  @ORM\Column(type="string")
+     * @Groups({"user_read", "instrument_read", "style_read"})
+     */
+    private $experience;
 
     public function __construct()
     {
-        $this->instrument = new ArrayCollection();
-        $this->style = new ArrayCollection();
+        $this->instruments = new ArrayCollection();
+        $this->styles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,65 +209,62 @@ class User implements UserInterface
 
         return $this;
     }
-
-   /**
-     * @return Collection|Instrument[]
-     */
-    public function getInstrument(): Collection
+    /**
+     * Get the value of instruments
+     */ 
+    public function getInstruments()
     {
-        return $this->instrument;
+        return $this->instruments;
     }
 
-    public function addInstrument(Instrument $instrument): self
+    /**
+     * Set the value of instruments
+     *
+     * @return  self
+     */ 
+    public function setInstruments($instruments)
     {
-        if (!$this->instrument->contains($instrument)) {
-            $this->instrument[] = $instrument;
-            $instrument->setUser($this);
-        }
+        $this->instruments = $instruments;
 
         return $this;
     }
 
-    public function removeInstrument(Instrument $instrument): self
+    /**
+     * Get the value of styles
+     */ 
+    public function getStyles()
     {
-        if ($this->instrument->contains($instrument)) {
-            $this->instrument->removeElement($instrument);
-            // set the owning side to null (unless already changed)
-            if ($instrument->getUser() === $this) {
-                $instrument->setUser(null);
-            }
-        }
+        return $this->styles;
+    }
+
+    /**
+     * Set the value of styles
+     *
+     * @return  self
+     */ 
+    public function setStyles($styles)
+    {
+        $this->styles = $styles;
 
         return $this;
     }
 
-/**
-     * @return Collection|Style[]
-     */
-    public function getStyle(): Collection
+    /**
+     * Get the value of experience
+     */ 
+    public function getExperience()
     {
-        return $this->style;
+        return $this->experience;
     }
 
-    public function addStyle(Style $style): self
+    /**
+     * Set the value of experience
+     *
+     * @return  self
+     */ 
+    public function setExperience($experience)
     {
-        if (!$this->style->contains($style)) {
-            $this->style[] = $style;
-            $style->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStyle(Style $style): self
-    {
-        if ($this->style->contains($style)) {
-            $this->style->removeElement($style);
-            // set the owning side to null (unless already changed)
-            if ($style->getUser() === $this) {
-                $style->setUser(null);
-            }
-        }
+        $this->experience = $experience;
 
         return $this;
     }

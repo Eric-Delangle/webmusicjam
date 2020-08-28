@@ -9,7 +9,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=InstrumentRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *  denormalizationContext={"groups"={"style_read", "user_read"}},
+ * )
  */
 class Instrument
 {

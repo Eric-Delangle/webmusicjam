@@ -14,7 +14,7 @@ async function findAll () {
             return styles;
         });
 }
-/*
+
 async function find(id) {
     const cachedUser = await Cache.get("users." + id);
     if(cachedUser) return cachedUser;
@@ -45,9 +45,20 @@ function update (id, user) {
     });
    
 }
-*/
+
+function create (styles) {
+    return axios.post(STYLES_API ,  styles ).then( async response =>{
+        const cachedStyles = await Cache.get("styles");
+        if (cachedStyles) {
+            Cache.set("styles",  [...cachedStyles, response.data]);
+        }
+        return response;
+    })
+}
+
 export default {
     findAll,
-    //find,
-   // update
+    find,
+    create,
+    update
 };

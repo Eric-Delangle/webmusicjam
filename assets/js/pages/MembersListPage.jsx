@@ -52,7 +52,7 @@ console.log(users)
                                
                                 <tr className="table-primary">
                                 <th scope="col">Style:</th>
-                                    {style.style && style.style.map( item => 
+                                    {style.styles && style.styles.map( item => 
                                         <td  key={item.id}>{item.name}</td>
                                         )}
                                       
@@ -67,10 +67,13 @@ console.log(users)
                                 </tr>
                          <tr>
                          <th scope="col">Instrument(s):</th>
-                                    {style.instrument && style.instrument.map( item => 
+                                    {style.instruments && style.instruments.map( item => 
                                         <td key={item.id}>{item.name}</td>
                                         )}
                                         </tr>
+
+                                        <th scope="col" >Année(s) de pratique</th>
+                                        <td>{style.experience}</td>
                                         <tr>
                                  
 

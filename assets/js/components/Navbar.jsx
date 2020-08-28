@@ -9,9 +9,6 @@ const Navbar = ({ history }) => {
 
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
-
-    console.log(isAuthenticated);
-
     const handleLogout = () => {
         AuthApi.logout();
         setIsAuthenticated(false);

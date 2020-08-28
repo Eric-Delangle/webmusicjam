@@ -12,8 +12,9 @@ const ProfilPage = (props) => {
         firstName: "",
         email: "",
         city: "",
-        style: [],
-        instrument: []
+        experience:"",
+        styles: [],
+        instruments: []
     });
 
     const [errors, setErrors] = useState({
@@ -21,16 +22,17 @@ const ProfilPage = (props) => {
         firstName: "",
         email: "",
         city: "",
-        style: [],
-        instrument: []
+        styles: [],
+        experience:"",
+        instruments: []
     })
 
     // Récuperation du profil en fonction de l'identifiant.
     const fetchUser = async userid => {
         try {
             // je dois recuperer l'id du membre voulu
-            const { firstName, lastName, email, city, style, instrument } = await UsersApi.find(userid);
-            setUser({ firstName, lastName, email, city, style, instrument });
+            const { firstName, lastName, email, city, styles, instruments, experience } = await UsersApi.find(userid);
+            setUser({ firstName, lastName, email, city, styles, instruments, experience });
             //   setLoading(false);
         } catch (error) {
             toast.error("Le profil n'a pas pu être chargé");
@@ -44,6 +46,7 @@ const ProfilPage = (props) => {
 
     console.log(user.style);
     console.log(user.instrument);
+    console.log(user);
     return (
         <>
 
@@ -51,36 +54,40 @@ const ProfilPage = (props) => {
             <table className="table table-hover">
                 <tbody>
                     <tr className="table-primary">
+                        <th scope="col">Année(s) de pratique:</th>
+                        <td>{user.experience}</td>
+                    </tr>
+                    <tr className="table-primary">
 
-                        <th scope="col">email</th>
+                        <th scope="col">email:</th>
                         <td>{user.email}</td>
 
                     </tr>
                     <tr className="table-primary">
-                        <th scope="col">Ville</th>
+                        <th scope="col">Ville:</th>
                         <td >{user.city}</td>
                     </tr>
                     <tr className="table-primary">
-                        <th scope="col">Style(s)</th>
-                        {user.style && user.style.map(genre =>
+                        <th scope="col">Style(s):</th>
+                        {user.styles && user.styles.map(genre =>
                             <td key={genre.id}>
                                 {genre.name}
                             </td>
                         )}
                     </tr>
                     <tr className="table-primary">
-                        <th scope="col">Instrument(s)</th>
-                        {user.instrument && user.instrument.map(instru =>
+                        <th scope="col">Instrument(s):</th>
+                        {user.instruments && user.instruments.map(instru =>
                             <td key={instru.id}>
                                 {instru.name}
                             </td>
                         )}
                     </tr>
                     <td>
-                                        <Link  className="btn btn-sm btn-info">
-                                            Le contacter
-                                    </Link></td>
-                        
+                        <a className="btn btn-sm btn-info">
+                            Le contacter
+                                    </a></td>
+
 
                 </tbody>
             </table>
