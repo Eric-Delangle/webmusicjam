@@ -5,7 +5,3 @@ body {
 .noir {
     color: #000000;
 }
-
-.noir :hover {
-    background-color: blue;
-}

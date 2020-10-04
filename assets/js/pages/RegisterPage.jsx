@@ -6,24 +6,24 @@ import StylesApi from "../services/StylesApi";
 import InstrumentsApi from "../services/InstrumentsApi";
 import { toast } from "react-toastify";
 import FieldList from "../components/forms/FieldList";
-import FieldInstrumentsList from "../components/forms/FieldInstrumentsList";
 import FieldXp from "../components/forms/FieldXp";
+import Select from 'react-select';
 
 const RegisterPage = ({ history }) => {
 
+
+    const selectedOptions = null;
+
     const [user, setUser] = useState({
+
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         passwordConfirm: "",
         city: "",
-        styles: [
-            {name: "" }
-        ],
-        instruments: [
-            { name: "" }
-        ],
+        styles: [],
+        instruments: [],
         experience: ""
     });
 
@@ -39,43 +39,62 @@ const RegisterPage = ({ history }) => {
         experience: ""
     });
 
-    /*
+    const [instruments, setInstruments] = useState([]);
+
     const optionsInstrus = [
-        { value: "basse", label: "Basse'" },
-        { value: 'batterie', label: 'Batterie' },
-        { value: 'guitare', label: 'Guitare' },
-        { value: 'piano', label: 'Piano' },
-        { value: 'chant', label: 'Chant' },
+        { value: "basse", label: "Basse,", id: 494 },
+        { value: 'batterie', label: 'Batterie', id: 495 },
+        { value: 'guitare', label: 'Guitare', id: 493 },
+        { value: 'piano', label: 'Piano', id: 496 },
+        { value: 'chant', label: 'Chant', id: 497 },
     ];
 
     const optionsStyles = [
-        { value: "rock", label: "Rock'" },
-        { value: 'blues', label: 'Blues' },
-        { value: 'reggae', label: 'Reggae' },
-        { value: 'jazz', label: 'Jazz' },
-        { value: 'funk', label: 'Funk' },
+        { value: "rock", label: "Rock", id: 531 },
+        { value: 'metal', label: 'Métal', id: 537 },
+        { value: 'reggae', label: 'Reggae', id: 532 },
+        { value: 'jazz', label: 'Jazz', id: 535 },
+        { value: 'funk', label: 'Funk', id: 533 },
+        { value: 'pop', label: 'Pop', id: 534 },
+        { value: 'rap', label: 'Rap', id: 536 },
     ];
-*/
 
-    // Gestion des changements des inputs dans le formulaire.
+
+    // Gestion des changements des inputs dans le formulaire simple.
     const handleChange = ({ currentTarget }) => {
 
         const { name, value } = currentTarget;
         setUser({ ...user, [name]: value });
     };
 
-    // Gestion des changements des inputs listes déroulantes.  
-    const handleListChange = (event) => {
-        event.preventDefault();
 
-  
-        const { name } = event;
-        console.log(Array.from(event.target.selectedOptions).map(o => o.value))
-        setUser({ ...user, [name]: Array.from(event.target.selectedOptions).map(o => o.value) },);
+    // Gestion des changements des inputs listes déroulantes.
+    const handleListStylesChange = (event) => {
+        //event.preventDefault();
+        console.log(user)
+        console.log(event)
+
+
+
+        const { name, styles } = event;
+        //console.log(Array.from(event.target.selectedOptions).map(o => o.value))
+        setUser({ ...user, [name]: Array.from(event).map(o => o.value) });
 
 
     };
 
+    // Gestion des changements des inputs listes déroulantes.
+    const handleListInstrusChange = (event) => {
+        //event.preventDefault();
+        console.log(user)
+        console.log(event)
+        const instruments = user.instruments
+        const  {name, value } =Array.from(event).map(o => o.value)  ;
+        //console.log(Array.from(event.target.selectedOptions).map(o => o.value))
+        setInstruments({ ...user, [instruments]:value});
+
+
+    };
 
     // Gestion de la soumission de l'utilisateur.
     const handleSubmit = async event => {
@@ -117,6 +136,8 @@ const RegisterPage = ({ history }) => {
 
 
     return (
+
+
         <>
             <div className="container">
                 <h1>Inscription</h1>
@@ -182,34 +203,32 @@ const RegisterPage = ({ history }) => {
                         value={user.experience}
                         onChange={handleChange}
                     />
-                    <br />
 
                     <label>
                         Choisissez votre ou vos instruments
                             <br />
                         <br />
-                        <select value={user.instruments} onChange={handleListChange} multiple={true} >
-                            <option value="basse">Basse</option>
-                            <option value="batterie">Batterie</option>
-                            <option value="guitare">Guitare</option>
-                            <option value="piano">Piano</option>
-                            <option value="chant">Chant</option>
-                        </select>
-
+                        <Select
+                            className="noir"
+                            value={selectedOptions}
+                            onChange={handleListInstrusChange}
+                            options={optionsInstrus}
+                            isMulti
+                        />
                     </label>
-        <br/>
+                    <br />
+                    <br />
                     <label>
-                        Choisissez votre ou vos styles
+                        Choisissez votre ou vos instruments
                             <br />
                         <br />
-                        <select value={user.styles} onChange={handleListChange} multiple={true} >
-                            <option value="jazz">Jazz</option>
-                            <option value="funk">Funk</option>
-                            <option value="rock">Rock</option>
-                            <option value="rap">Rap</option>
-                            <option value="reggae">Reggae</option>
-                        </select>
-
+                        <Select
+                            className="noir"
+                            value={selectedOptions}
+                            onChange={handleListStylesChange}
+                            options={optionsStyles}
+                            isMulti
+                        />
                     </label>
                     <div className="form-group">
                         <button type="submit" className="btn btn-success">

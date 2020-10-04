@@ -61,7 +61,8 @@ class AppFixtures extends Fixture
                 ->setLastName($faker->lastName)
                 ->setCity($faker->city)
                 ->setPassword($hash)
-                ->setEmail($faker->email);
+                ->setEmail($faker->email)
+                ->setExperience($faker->randomDigit() );
 
                 /*
                 // je tente d'avoir aleatoirement 1 a 5 styles par user
@@ -82,11 +83,11 @@ class AppFixtures extends Fixture
      */
                 
                 foreach ($styleCategories as $styleCategory) {
-                    $user->getStyle($styleCategories)->add($styleCategory);
+                    $user->getStyles($styleCategories)->add($styleCategory);
                 }
 
                 foreach ($instrumentCategories as $instrumentCategory) {
-                    $user->getInstrument($instrumentCategories)->add($instrumentCategory);
+                    $user->getInstruments($instrumentCategories)->add($instrumentCategory);
                 }
 
             $manager->persist($user);
