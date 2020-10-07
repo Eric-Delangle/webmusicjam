@@ -4,8 +4,8 @@ import { INSTRUMENTS_API } from "../config";
 
 async function findAll () {
 
-    const cachedStyles = await Cache.get("instruments");
-    if(cachedStyles) return cachedStyles;
+    const cachedInstruments = await Cache.get("instruments");
+    if(cachedInstruments) return cachedInstruments;
     return axios 
         .get(INSTRUMENTS_API)
         .then(response => {

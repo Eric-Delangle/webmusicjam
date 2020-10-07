@@ -5,6 +5,7 @@ const Select = ({ name, value, error="", label, onChange, children }) => {
     <div className="form-group">
     <label htmlFor= { name }>{ label }</label>
     <select 
+        multiple
         onChange = { onChange } 
         name={ name } 
         id={ name } 

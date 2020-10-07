@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -73,7 +74,8 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user",cascade={"persist"})
-     * @Groups({ "style_read","user_read" })
+     *@ORM\JoinColumn(onDelete="SET NULL")
+     * @Groups({ "instrument_read","user_read" })
      */
     private $instruments;
 
@@ -212,7 +214,7 @@ class User implements UserInterface
     /**
      * Get the value of instruments
      */ 
-    public function getInstruments()
+    public function getInstruments(): Collection
     {
         return $this->instruments;
     }
@@ -232,7 +234,7 @@ class User implements UserInterface
     /**
      * Get the value of styles
      */ 
-    public function getStyles()
+    public function getStyles(): Collection
     {
         return $this->styles;
     }

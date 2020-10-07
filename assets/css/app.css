@@ -5,3 +5,17 @@ body {
 .noir {
     color: #000000;
 }
+
+label {
+    width: 200px;
+    height: auto;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #375a7f;
+    text-align: center;
+}
+
+.bloc_selects {
+    display: flex;
+    justify-content: space-around;
+}
+

@@ -85,7 +85,7 @@ const ProfilPage = (props) => {
                     </tr>
                     <td>
                         <a className="btn btn-sm btn-info">
-                            Le contacter
+                            Contacter
                                     </a></td>
 
 

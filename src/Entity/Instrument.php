@@ -5,12 +5,21 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InstrumentRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=InstrumentRepository::class)
- * @ApiResource(
- *  denormalizationContext={"groups"={"style_read", "user_read"}},
+ *  @ApiResource(
+ *  attributes={
+ *      "pagination_enabled" = true
+ * },
+ *  collectionOperations={"GET", "POST"},
+ *  itemOperations={"GET", "PUT"},
+ *  normalizationContext ={
+ *      "groups" = {"instrument_read", "user_read"},"enable_max_depth" = true,
+ * },
+ * denormalizationContext={"groups"={"instrument_read", "user_read"}},
  * )
  */
 class Instrument
@@ -34,6 +43,11 @@ class Instrument
      */
     private $user;
 
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,12 +65,22 @@ class Instrument
         return $this;
     }
 
-    public function getUser(): ?User
+
+
+    /**
+     * Get the value of user
+     */ 
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser($user)
     {
         $this->user = $user;
 
