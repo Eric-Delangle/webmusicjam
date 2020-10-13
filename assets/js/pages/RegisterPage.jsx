@@ -16,8 +16,8 @@ const RegisterPage = ({ history }) => {
     password: "",
     passwordConfirm: "",
     city: "",
-    styles: [],
-    instruments: [],
+    instrument: [],
+    style: [],
     experience: "",
   });
 
@@ -28,8 +28,8 @@ const RegisterPage = ({ history }) => {
     password: "",
     passwordConfirm: "",
     city: "",
-    styles: [],
-    instruments: [],
+    instrument: [],
+    style: [],
     experience: "",
   });
 
@@ -70,28 +70,39 @@ const RegisterPage = ({ history }) => {
     fetchInstruments();
   }, []);
 
-  // Gestion des changements des inputs dans le formulaire simple.
-  const handleChange = ({ currentTarget }) => {
-    const { name, value } = currentTarget;
-    setUser({ ...user, [name]: value });
+  // Gestion des changements des inputs dans le formulaire.
+  const handleChange = ({currentTarget} ) => {
+    const {name,value} = currentTarget;
+    // comment faire pour chopper les entrées multiples
+    const {instrument, style} =Array.from(currentTarget.value).map(o=>o.value);
+console.log({name,value});
+console.log({instrument,style,name,value});
+
+    setUser({ ...user, [name]: value, 
+    //   la faut que je trouve comment entrer l'identifiant IRI des instruments et des styles
+      instrument: [`/api/instruments/${value }`],
+      style: [`/api/styles/${value}`],
+  }); 
   };
 
   // Gestion de la soumission de l'utilisateur.
   const handleSubmit = async (event) => {
     console.log(user);
+    console.log(user.instrument);
+    console.log(user.style);
     event.preventDefault();
     const apiErrors = {};
 
     if (user.password !== user.passwordConfirm) {
       apiErrors.passwordConfirm =
-        "Votre conformation de mot de passe n'est pas conforme avec le mot de passe original";
+        "Votre confirmation de mot de passe n'est pas conforme avec le mot de passe original";
       setErrors(apiErrors);
       toast.error("Il y a des erreurs dans votre formulaire !");
       return;
     }
 
     try {
-      // setUser( ...user,  Array.from(event.target.selectedOptions).map(o => o.value));
+
       await UsersApi.register(user);
 
       setErrors({});
@@ -181,69 +192,46 @@ const RegisterPage = ({ history }) => {
             onChange={handleChange}
           />
           <div className="bloc_selects">
-              <div className="item">
-            <label>
-              Choisissez votre ou vos instruments
-              <br />
-              <br />
-              <Select
-                name="instruments"
-                label="instruments"
-                value={instruments.name}
-                error={errors.instrument}
-                onChange={handleChange}
-              >
-                {instruments.map((instrument) => (
-                  <option key={instrument.id} value={instrument.id}>
-                    {instrument.name}
-                  </option>
-                ))}
-              </Select>
-              <br />
+            <div className="item">
               <label>
-                <Field
-                  name="instrument"
-                  label="Vous pouvez aussi ajouter un instrument"
-                  type="text"
-                  placeholder="Ajouter un instrument"
-                  error={errors.passwordConfirm}
-                  value={user.passwordConfirm}
+                Choisissez votre ou vos instruments
+                <br />
+                <br />
+                <Select
+                multiple
+                  name={instruments}
+                  label="instruments"
+                  value={user.instrument || []}
+                  error={errors.instrument}
                   onChange={handleChange}
-                />
+                >
+                  {instruments.map((instrument) => (
+                    <option key={instrument.id} value={instrument.id}>
+                      {instrument.name}
+                    </option>
+                  ))}
+                </Select>
               </label>
-            </label>
-</div>
-<div className="item">
-            <label>
-              Choisissez votre ou vos styles
-              <br />
-              <br />
-              <Select
-                name="style"
-                label="styles"
-                value={styles.name}
-                error={errors.style}
-                onChange={handleChange}
-              >
-                {styles.map((style) => (
-                  <option key={style.id} value={style.id}>
-                    {style.name}
-                  </option>
-                ))}
-              </Select>
+            </div>
+            <div className="item">
               <label>
-
-                <Field
-                  name="style"
-                  label="Vous pouvez aussi ajouter un style"
-                  type="text"
-                  placeholder="Ajouter un style"
+                Choisissez votre ou vos styles
+                <br />
+                <br />
+                <Select
+                  name={styles.name}
+                  label="styles"
+                  value={user.style || []}
                   error={errors.style}
-                  value={user.style}
                   onChange={handleChange}
-                />
+                >
+                  {styles.map((style) => (
+                    <option key={style.id} value={style.id}>
+                      {style.name}
+                    </option>
+                  ))}
+                </Select>
               </label>
-            </label>
             </div>
           </div>
           <div className="form-group">

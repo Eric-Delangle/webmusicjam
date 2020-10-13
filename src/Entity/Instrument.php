@@ -14,6 +14,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  attributes={
  *      "pagination_enabled" = true
  * },
+ * collectionOperations={"GET", "POST"},
+ *  itemOperations={"GET", "PUT"},
  *  collectionOperations={"GET", "POST"},
  *  itemOperations={"GET", "PUT"},
  *  normalizationContext ={

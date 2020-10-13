@@ -77,14 +77,14 @@ class User implements UserInterface
      *@ORM\JoinColumn(onDelete="SET NULL")
      * @Groups({ "instrument_read","user_read" })
      */
-    private $instruments;
+    private $instrument;
 
     /**
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" ,cascade={"persist"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @Groups({"style_read","user_read" })
      */
-    private $styles ;
+    private $style ;
 
     /**
      *  @ORM\Column(type="string")
@@ -214,9 +214,9 @@ class User implements UserInterface
     /**
      * Get the value of instruments
      */ 
-    public function getInstruments(): Collection
+    public function getInstrument(): Collection
     {
-        return $this->instruments;
+        return $this->instrument;
     }
 
     /**
@@ -224,9 +224,9 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setInstruments($instruments)
+    public function setInstrument($instrument)
     {
-        $this->instruments = $instruments;
+        $this->instrument = $instrument;
 
         return $this;
     }
@@ -234,9 +234,9 @@ class User implements UserInterface
     /**
      * Get the value of styles
      */ 
-    public function getStyles(): Collection
+    public function getStyle(): Collection
     {
-        return $this->styles;
+        return $this->style;
     }
 
     /**
@@ -244,9 +244,9 @@ class User implements UserInterface
      *
      * @return  self
      */ 
-    public function setStyles($styles)
+    public function setStyle($style)
     {
-        $this->styles = $styles;
+        $this->style = $style;
 
         return $this;
     }
