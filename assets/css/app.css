@@ -6,8 +6,8 @@ body {
     color: #000000;
 }
 
-label {
-    width: 200px;
+label, .titre {
+    width: 400px;
     height: auto;
     border-radius: 10px 10px 10px 10px;
     background-color: #375a7f;
@@ -16,5 +16,9 @@ label {
 
 .bloc_selects {
     display: flex;
+    justify-content: space-around;
+}
+
+.item {
     justify-content: space-around;
 }

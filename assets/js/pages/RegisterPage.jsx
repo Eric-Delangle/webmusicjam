@@ -6,9 +6,19 @@ import StylesApi from "../services/StylesApi";
 import InstrumentsApi from "../services/InstrumentsApi";
 import { toast } from "react-toastify";
 import FieldXp from "../components/forms/FieldXp";
-import Select from "./../components/forms/Select";
 
 const RegisterPage = ({ history }) => {
+  const [styles, setStyles] = useState([]);
+  const [instruments, setInstruments] = useState([]);
+
+  const [checked, setChecked] =useState([]);
+
+  const optionsInstrus = instruments.map((instrument) => (
+    <option key={instrument.id} value={instrument.id}>
+      {instrument.name}
+    </option>
+  ));
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -16,8 +26,16 @@ const RegisterPage = ({ history }) => {
     password: "",
     passwordConfirm: "",
     city: "",
-    instrument: [],
-    style: [],
+    instrument: [
+      { 
+      name: [checked],
+      }
+    ],
+    style: [
+      {
+        name: "",
+      },
+    ],
     experience: "",
   });
 
@@ -32,9 +50,6 @@ const RegisterPage = ({ history }) => {
     style: [],
     experience: "",
   });
-
-  const [styles, setStyles] = useState([]);
-  const [instruments, setInstruments] = useState([]);
 
   // Récuperation des styles
   const fetchStyles = async () => {
@@ -71,19 +86,32 @@ const RegisterPage = ({ history }) => {
   }, []);
 
   // Gestion des changements des inputs dans le formulaire.
-  const handleChange = ({currentTarget} ) => {
-    const {name,value} = currentTarget;
-    // comment faire pour chopper les entrées multiples
-    const {instrument, style} =Array.from(currentTarget.value).map(o=>o.value);
-console.log({name,value});
-console.log({instrument,style,name,value});
+  const handleChange = ({ currentTarget }) => {
+    const { name, value } = currentTarget;
 
-    setUser({ ...user, [name]: value, 
-    //   la faut que je trouve comment entrer l'identifiant IRI des instruments et des styles
-      instrument: [`/api/instruments/${value }`],
-      style: [`/api/styles/${value}`],
-  }); 
+    console.log({ name, value });
+
+    setUser({ ...user, [name]: value });
   };
+
+
+
+  const checkInstrusChange = (e) => {
+    console.log(e.target.checked, e.target.name); 
+  
+    const name = e.target.name;
+    const [checked] = [e.target.checked];
+   
+   setChecked({ instrument:[checked.name]});
+   console.log({ instrument:[name]});
+    //const choix = user.instrument.push( [{ name: `${name}` }]);
+    //console.log(choix);
+    setUser({ ...user,instrument:[{name:name}]});
+
+
+console.log(user);
+  };
+
 
   // Gestion de la soumission de l'utilisateur.
   const handleSubmit = async (event) => {
@@ -102,7 +130,6 @@ console.log({instrument,style,name,value});
     }
 
     try {
-
       await UsersApi.register(user);
 
       setErrors({});
@@ -193,45 +220,20 @@ console.log({instrument,style,name,value});
           />
           <div className="bloc_selects">
             <div className="item">
-              <label>
-                Choisissez votre ou vos instruments
-                <br />
-                <br />
-                <Select
-                multiple
-                  name={instruments}
-                  label="instruments"
-                  value={user.instrument || []}
-                  error={errors.instrument}
-                  onChange={handleChange}
-                >
-                  {instruments.map((instrument) => (
-                    <option key={instrument.id} value={instrument.id}>
-                      {instrument.name}
-                    </option>
-                  ))}
-                </Select>
-              </label>
-            </div>
-            <div className="item">
-              <label>
-                Choisissez votre ou vos styles
-                <br />
-                <br />
-                <Select
-                  name={styles.name}
-                  label="styles"
-                  value={user.style || []}
-                  error={errors.style}
-                  onChange={handleChange}
-                >
-                  {styles.map((style) => (
-                    <option key={style.id} value={style.id}>
-                      {style.name}
-                    </option>
-                  ))}
-                </Select>
-              </label>
+              <p className="label">Choisissez votre ou vos instruments</p>
+              {instruments.map((instrument) => (
+                <Field
+                  key={instrument.id}
+                  value={instrument.id}
+                  type="checkbox"
+                  name={instrument.name}
+                  checked={checked}
+                  label={instrument.name}
+                  onChange={checkInstrusChange}
+                />
+              ))}
+
+              <br />
             </div>
           </div>
           <div className="form-group">
