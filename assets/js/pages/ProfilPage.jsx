@@ -31,8 +31,8 @@ const ProfilPage = (props) => {
     const fetchUser = async userid => {
         try {
             // je dois recuperer l'id du membre voulu
-            const { firstName, lastName, email, city, styles, instruments, experience } = await UsersApi.find(userid);
-            setUser({ firstName, lastName, email, city, styles, instruments, experience });
+            const { firstName, lastName, email, city, style, instrument, experience } = await UsersApi.find(userid);
+            setUser({ firstName, lastName, email, city, style, instrument, experience });
             //   setLoading(false);
         } catch (error) {
             toast.error("Le profil n'a pas pu être chargé");
@@ -69,7 +69,7 @@ const ProfilPage = (props) => {
                     </tr>
                     <tr className="table-primary">
                         <th scope="col">Style(s):</th>
-                        {user.styles && user.styles.map(genre =>
+                        {user.style && user.style.map(genre =>
                             <td key={genre.id}>
                                 {genre.name}
                             </td>
@@ -77,7 +77,7 @@ const ProfilPage = (props) => {
                     </tr>
                     <tr className="table-primary">
                         <th scope="col">Instrument(s):</th>
-                        {user.instruments && user.instruments.map(instru =>
+                        {user.instrument && user.instrument.map(instru =>
                             <td key={instru.id}>
                                 {instru.name}
                             </td>

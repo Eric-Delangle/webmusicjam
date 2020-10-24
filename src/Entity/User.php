@@ -10,7 +10,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
  /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -76,6 +76,7 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user",cascade={"persist"})
      *@ORM\JoinColumn(onDelete="SET NULL")
      * @Groups({ "instrument_read","user_read" })
+     * @Assert\NotBlank
      */
     private $instrument;
 
@@ -83,6 +84,7 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" ,cascade={"persist"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @Groups({"style_read","user_read" })
+     * @Assert\NotBlank
      */
     private $style ;
 

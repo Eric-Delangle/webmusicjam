@@ -11,7 +11,7 @@ const RegisterPage = ({ history }) => {
   const [styles, setStyles] = useState([]);
   const [instruments, setInstruments] = useState([]);
 
-  const [checked, setChecked] =useState([]);
+  const [checked, setChecked] = useState([]);
 
   const optionsInstrus = instruments.map((instrument) => (
     <option key={instrument.id} value={instrument.id}>
@@ -26,16 +26,8 @@ const RegisterPage = ({ history }) => {
     password: "",
     passwordConfirm: "",
     city: "",
-    instrument: [
-      { 
-      name: [checked],
-      }
-    ],
-    style: [
-      {
-        name: "",
-      },
-    ],
+    instrument: [],
+    style: [],
     experience: "",
   });
 
@@ -56,7 +48,6 @@ const RegisterPage = ({ history }) => {
     try {
       const data = await StylesApi.findAll();
       setStyles(data);
-      console.log(data);
     } catch (error) {
       toast.error("Impossible de charger les styles");
       history.replace("/home");
@@ -73,7 +64,6 @@ const RegisterPage = ({ history }) => {
     try {
       const data = await InstrumentsApi.findAll();
       setInstruments(data);
-      console.log(data);
     } catch (error) {
       toast.error("Impossible de charger les instruments");
       history.replace("/home");
@@ -89,36 +79,58 @@ const RegisterPage = ({ history }) => {
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
 
-    console.log({ name, value });
-
     setUser({ ...user, [name]: value });
   };
 
-
-
+  // Selection du ou des instruments
   const checkInstrusChange = (e) => {
-    console.log(e.target.checked, e.target.name); 
-  
-    const name = e.target.name;
-    const [checked] = [e.target.checked];
-   
-   setChecked({ instrument:[checked.name]});
-   console.log({ instrument:[name]});
-    //const choix = user.instrument.push( [{ name: `${name}` }]);
-    //console.log(choix);
-    setUser({ ...user,instrument:[{name:name}]});
+    const value = e.target.value;
 
+    // si la case est cochée elle est true si elle est decochée elle est false
+    // si checked est true je dois l'ajouter au tableau des options choisies
+    // si elle est false je le sors du tableau
 
-console.log(user);
+    if (e.target.checked) {
+      user.instrument.push({ id: value });
+    } else {
+      user.instrument.pop({ id: value });
+    }
+
+    setUser({
+      ...user,
+      // instrument:[{id:value}]
+    });
   };
 
+  // Selection du ou des styles
+  const checkStylesChange = (e) => {
+    const value = e.target.value;
+
+    // si la case est cochée elle est true si elle est decochée elle est false
+    // si checked est true je dois l'ajouter au tableau des options choisies
+    // si elle est false je le sors du tableau
+
+    if (e.target.checked) {
+      user.style.push({ id: value });
+    } else {
+      user.style.pop({ id: value });
+    }
+
+    setUser({
+      ...user,
+      // instrument:[{id:value}]
+    });
+  };
 
   // Gestion de la soumission de l'utilisateur.
-  const handleSubmit = async (event) => {
-    console.log(user);
-    console.log(user.instrument);
-    console.log(user.style);
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (user.instrument == "") {
+      toast.error("Vous devez choisir au moins un instrument !");
+    }
+    if (user.style == "") {
+      toast.error("Vous devez choisir au moins un style !");
+    }
     const apiErrors = {};
 
     if (user.password !== user.passwordConfirm) {
@@ -227,9 +239,25 @@ console.log(user);
                   value={instrument.id}
                   type="checkbox"
                   name={instrument.name}
-                  checked={checked}
+                  checked={!checked}
                   label={instrument.name}
                   onChange={checkInstrusChange}
+                />
+              ))}
+
+              <br />
+            </div>
+            <div className="item">
+              <p className="label">Choisissez votre ou vos styles</p>
+              {styles.map((style) => (
+                <Field
+                  key={style.id}
+                  value={style.id}
+                  type="checkbox"
+                  name={style.name}
+                  checked={!checked}
+                  label={style.name}
+                  onChange={checkStylesChange}
                 />
               ))}
 

@@ -5,8 +5,10 @@ import { Link  } from 'react-router-dom';
 
 
 
-const StylesPage = (props) => {
+const MembersListPage = (props) => {
 
+
+    
   //  const [styles, setStyles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -29,13 +31,15 @@ const StylesPage = (props) => {
         fetchUsers();
 
     }, []);
-console.log(users)
+
+
+    console.log(users);
     // La pagination des données se fait grâce au composant pagination
     //Gestion du changement de page
     const handlePageChange = page => setCurrentPage(page);
 
     // Pagination des données.
-    const paginatedFullStyles = users.length > itemsPerPage ? Pagination.getData(
+    const paginatedUsers = users.length > itemsPerPage ? Pagination.getData(
         users,
         currentPage,
         itemsPerPage
@@ -43,42 +47,42 @@ console.log(users)
 
     return (
         <>
-            {paginatedFullStyles.map(style => (
+            {paginatedUsers.map(user => (
 
-                <div className="container mt-0 bg-primary " key={style.id}>
+                <div className="container mt-0 bg-primary " key={user.id}>
                     <table className="table table-hover">
                   
                         <tbody>
                                
                                 <tr className="table-primary">
                                 <th scope="col">Style:</th>
-                                    {style.styles && style.styles.map( item => 
+                                    {user.style && user.style.map( item => 
                                         <td  key={item.id}>{item.name}</td>
                                         )}
                                       
                                     </tr>
                                     <tr>
                                     <th scope="col">Membre:</th>
-                                    <td >{style.firstName}   {style.lastName}</td>
+                                    <td >{user.firstName}   {user.lastName}</td>
                                     </tr>
                                     <tr>
                                     <th scope="col">Ville:</th>
-                                    <td>{style.city}</td>
+                                    <td>{user.city}</td>
                                 </tr>
                          <tr>
                          <th scope="col">Instrument(s):</th>
-                                    {style.instruments && style.instruments.map( item => 
+                                    {user.instrument && user.instrument.map( item => 
                                         <td key={item.id}>{item.name}</td>
                                         )}
                                         </tr>
 
                                         <th scope="col" >Année(s) de pratique</th>
-                                        <td>{style.experience}</td>
+                                        <td>{user.experience}</td>
                                         <tr>
                                  
 
                                     <td>
-                                        <Link to={"/users/" + style.id} onClick={() =>  window.localStorage.setItem("id", style.id)} className="btn btn-sm btn-info">
+                                        <Link to={"/users/" + user.id} onClick={() =>  window.localStorage.setItem("id", user.id)} className="btn btn-sm btn-info">
                                             Profil
                                     </Link></td>
                                 </tr>
@@ -96,7 +100,7 @@ console.log(users)
     );
 }
 
-export default StylesPage;
+export default MembersListPage;
 
 
 
