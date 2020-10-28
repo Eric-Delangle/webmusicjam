@@ -24,12 +24,16 @@ const LoginPage = ({ history }) => {
         const handleSubmit = async event => {
         event.preventDefault();
        try {
+           
            await AuthApi.authenticate(credentials);
            setError("");
            setIsAuthenticated(true);
            toast.success("Vous êtes desormais connecté(e) !")
            history.replace("/member");
+           
+          
            } catch(error) {
+               console.log(credentials);
            setError("Aucun compte ne possède cette adresse ou alors les informations ne correspondent pas.");
            toast.error("Une erreur est survenue !");
        }

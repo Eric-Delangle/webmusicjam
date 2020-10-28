@@ -9,8 +9,10 @@ const MemberPage = (props) => {
 
     // je récupere le token 
     const jwt = window.localStorage.getItem("authToken");
+    console.log(jwt);
     // je le décode
     const decoded = jwt_decode(jwt);
+    console.log(decoded);
     // j'en extrait l'id
     const id = decoded.id;
 
@@ -37,7 +39,7 @@ const MemberPage = (props) => {
     }, [id]);
 
     console.log(user)
-    console.log(user.styles)
+    console.log(user.style)
     return (
         <>
 
@@ -58,10 +60,10 @@ const MemberPage = (props) => {
                 <tbody>
 
                     <tr className="table-primary">
-                        {user.styles && user.styles.map(item=>
+                        {user.style && user.style.map(item=>
                             <td key={item.id}>{item.name}</td>
                         )}
-                          {user.instruments&& user.instruments.map(item=>
+                          {user.instrument&& user.instrument.map(item=>
                             <td key={item.id}>{item.name}</td>
                         )}
                         

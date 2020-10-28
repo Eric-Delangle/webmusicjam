@@ -16,7 +16,6 @@ function logout() {
  */
 function authenticate (credentials) {
     return  axios.post(LOGIN_API, credentials)
-    
      .then(response => response.data.token)
      .then( token => {
       // Je stocke le token dans mon localStorage
@@ -24,9 +23,7 @@ function authenticate (credentials) {
       // On previent axios qu'on a maintenant un header par defaut sur toutes nos futures requetes HTTP.
       setAxiosToken(token);
       console.log(token);
-      console.log(response);
      })
-     
   }
 
 /**

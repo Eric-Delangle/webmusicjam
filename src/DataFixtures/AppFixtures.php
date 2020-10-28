@@ -8,10 +8,12 @@ use App\Entity\User;
 use App\Entity\Instrument;
 use App\Entity\Style;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Common\Collections\Collection;
+
 
 class AppFixtures extends Fixture
 {
@@ -33,7 +35,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $styleCat = ['Rock', 'Reggae', 'Funk', 'Pop', 'Jazz', 'Rap'];
+        $styleCat = ['Rock', 'Reggae', 'Funk', 'Pop', 'Jazz', 'Rap','Métal'];
         $instrumentCat = ['Guitare', 'Basse', 'Batterie', 'Piano', 'Chant'];
        
 
@@ -64,30 +66,13 @@ class AppFixtures extends Fixture
                 ->setEmail($faker->email)
                 ->setExperience($faker->randomDigit() );
 
-                /*
-                // je tente d'avoir aleatoirement 1 a 5 styles par user
-                for($s = 0; $s <  mt_rand(1, 5); $s++){
-                    $style = new Style();
-                    $style->setName($faker->randomElement( $styleCat));
-                    $user->addStyle($this->$style->getName());
-                    $manager->persist($style);
-                }
 
-                 // je tente d'avoir aleatoirement 1 a 5 instruments par user
-                 for($i = 0; $i <  mt_rand(1, 5); $i++){
-                    $instrument = new Instrument();
-                    $instrument->setName($faker->randomElement( $instrumentCat));
-                    $user->addInstrument($this->instrument->getName());
-                    $manager->persist($instrument);
-                }
-     */
-                
                 foreach ($styleCategories as $styleCategory) {
-                    $user->getStyles($styleCategories)->add($styleCategory);
+                    $user->getStyle($styleCategories)->add($styleCategory);
                 }
 
                 foreach ($instrumentCategories as $instrumentCategory) {
-                    $user->getInstruments($instrumentCategories)->add($instrumentCategory);
+                    $user->getInstrument($instrumentCategories)->add($instrumentCategory);
                 }
 
             $manager->persist($user);

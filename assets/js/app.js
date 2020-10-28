@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute";
 //Permet de savoir si on est authentifié au démarrage de l'appli.
 AuthApi.setup();
 
+
 const App = () => {
   
     // Il faudrait par defaut qu'on demande a Authapi si on est connecté ou pas.

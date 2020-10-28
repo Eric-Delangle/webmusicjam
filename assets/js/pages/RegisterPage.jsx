@@ -145,7 +145,7 @@ const RegisterPage = ({ history }) => {
       await UsersApi.register(user);
 
       setErrors({});
-      // flash success
+      
       toast.success(
         "Vous êtes desormais inscrit(e), vous pouvez vous connecter !"
       );

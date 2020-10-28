@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
  /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,7 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "groups"={"user_read", "style_read", "instrument_read"},"enable_max_depth" = true,
  *  },
  * denormalizationContext={"groups"={"style_read", "user_read"}},
- * )
+ * ),
+ * @UniqueEntity("email", message ="Cet email est déjà utilisé.")
  */
 
 class User implements UserInterface
@@ -96,8 +98,8 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->instruments = new ArrayCollection();
-        $this->styles = new ArrayCollection();
+        $this->instrument = new ArrayCollection();
+        $this->style = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,7 +126,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->firstName;
+        return (string) $this->email;
     }
 
     /**
