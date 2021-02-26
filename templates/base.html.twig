@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
-   
-        <!-- CSS ET JS BOOTSTRAP-->
-      
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/> 
-        {% endblock %}
-    </head>
-    <body>
-    
-         {% block body %}{% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-    
-        {% endblock %}
-        
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+		<link
+		rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<!-- CSS ET JS BOOTSTRAP-->
+
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+		{% endblock %}
+	</head>
+	<body>
+
+		{% block body %}{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+
+		{% endblock %}
+
+	</body>
 </html>

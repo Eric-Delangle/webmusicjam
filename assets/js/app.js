@@ -19,7 +19,6 @@ import PrivateRoute from "./components/PrivateRoute";
 //Permet de savoir si on est authentifié au démarrage de l'appli.
 AuthApi.setup();
 
-
 const App = () => {
   
     // Il faudrait par defaut qu'on demande a Authapi si on est connecté ou pas.
@@ -45,7 +44,7 @@ const App = () => {
                 <NavbarWithRouter />
                 <main className="container pt-5">
                     <Switch>
-                    <Route path="/login"  component= { LoginPage }/>
+                        <Route path="/login"  component= { LoginPage }/>
                         <Route path="/register"  component= { RegisterPage }/>
                         <PrivateRoute path="/member" component = { MemberPage }/>
                         <Route path="/users/:id" component={ProfilPage} />

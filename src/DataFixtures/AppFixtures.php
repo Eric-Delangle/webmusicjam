@@ -66,15 +66,13 @@ class AppFixtures extends Fixture
                 ->setEmail($faker->email)
                 ->setExperience($faker->randomDigit() );
 
-
-                foreach ($styleCategories as $styleCategory) {
-                    $user->getStyle($styleCategories)->add($styleCategory);
-                }
-
                 foreach ($instrumentCategories as $instrumentCategory) {
                     $user->getInstrument($instrumentCategories)->add($instrumentCategory);
                 }
-
+          
+                foreach ($styleCategories as $styleCategory) {
+                    $user->getStyle($styleCategories)->add($styleCategory);
+                }
             $manager->persist($user);
         }
         $manager->flush();

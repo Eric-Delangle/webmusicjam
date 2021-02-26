@@ -125,12 +125,15 @@ const RegisterPage = ({ history }) => {
   // Gestion de la soumission de l'utilisateur.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (user.instrument == "") {
       toast.error("Vous devez choisir au moins un instrument !");
     }
+    
     if (user.style == "") {
       toast.error("Vous devez choisir au moins un style !");
     }
+    
     const apiErrors = {};
 
     if (user.password !== user.passwordConfirm) {
@@ -230,6 +233,7 @@ const RegisterPage = ({ history }) => {
             value={user.experience}
             onChange={handleChange}
           />
+          
           <div className="bloc_selects">
             <div className="item">
               <p className="label">Choisissez votre ou vos instruments</p>
@@ -247,6 +251,7 @@ const RegisterPage = ({ history }) => {
 
               <br />
             </div>
+            
             <div className="item">
               <p className="label">Choisissez votre ou vos styles</p>
               {styles.map((style) => (
@@ -263,7 +268,9 @@ const RegisterPage = ({ history }) => {
 
               <br />
             </div>
+            
           </div>
+              
           <div className="form-group">
             <button type="submit" className="btn btn-success">
               Enregistrer

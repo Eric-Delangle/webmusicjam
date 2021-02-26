@@ -22,3 +22,13 @@ label, .titre {
 .item {
     justify-content: space-around;
 }
+
+/* espace membre */
+
+#visio {
+    width: 300px;
+    height: 250px;
+    background-color: #375a7f;
+    text-align: center;
+}
+

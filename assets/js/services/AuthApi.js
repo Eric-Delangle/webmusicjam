@@ -15,6 +15,7 @@ function logout() {
  * @param {object} credentials 
  */
 function authenticate (credentials) {
+  console.log(credentials);
     return  axios.post(LOGIN_API, credentials)
      .then(response => response.data.token)
      .then( token => {

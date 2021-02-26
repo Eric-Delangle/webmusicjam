@@ -77,7 +77,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="user",cascade={"persist"})
      *@ORM\JoinColumn(onDelete="SET NULL")
-     * @Groups({ "instrument_read","user_read" })
+     * @Groups({ "instrument_read","user_read" ,"style_read" })
      * @Assert\NotBlank
      */
     private $instrument;
@@ -85,7 +85,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="user" ,cascade={"persist"})
      * @ORM\JoinColumn(onDelete="SET NULL")
-     * @Groups({"style_read","user_read" })
+     * @Groups({"style_read","user_read","instrument_read"  })
      * @Assert\NotBlank
      */
     private $style ;

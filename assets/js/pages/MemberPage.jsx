@@ -44,11 +44,13 @@ const MemberPage = (props) => {
         <>
 
             <h1>Ton espace perso.</h1>
+            {/* La je vais inclure une div qui fera apparaitre la page de visioconference */}
+            <div id="visio"><p className="">Ecran de visio</p></div>
             <table className="table table-hover">
 
                 <thead>
                     <tr>
-                        <th scope="col">Style(s)</th>
+                        <th scope="row">Style(s)</th>
                         <th scope="col">Instrument(s)</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Prenom</th>

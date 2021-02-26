@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8000/api/";  // constante à changer au déploiement
+export const API_URL = process.env.API_URL;
 
 export const STYLES_API = API_URL + "styles";
 export const USERS_API = API_URL + "users";
