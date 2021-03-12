@@ -1,34 +1,39 @@
 body {
-    background-color: lightgray;
+  background-color: lightgray;
+}
+
+#app {
+  position: absolute;
+  width: 100%;
 }
 
 .noir {
-    color: #000000;
+  color: #000000;
 }
 
-label, .titre {
-    width: 400px;
-    height: auto;
-    border-radius: 10px 10px 10px 10px;
-    background-color: #375a7f;
-    text-align: center;
+label,
+.titre {
+  width: 400px;
+  height: auto;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #375a7f;
+  text-align: center;
 }
 
 .bloc_selects {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .item {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 /* espace membre */
 
 #visio {
-    width: 300px;
-    height: 250px;
-    background-color: #375a7f;
-    text-align: center;
+  width: 300px;
+  height: 250px;
+  background-color: #375a7f;
+  text-align: center;
 }
-

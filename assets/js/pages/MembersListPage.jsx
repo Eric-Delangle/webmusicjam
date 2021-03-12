@@ -32,7 +32,7 @@ const MembersListPage = (props) => {
 
     }, []);
 
-
+    console.log("merde");
     console.log(users);
     // La pagination des données se fait grâce au composant pagination
     //Gestion du changement de page
