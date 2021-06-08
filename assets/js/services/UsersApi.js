@@ -47,7 +47,7 @@ function update (id, user) {
 }
 
 function register (user) {
-    return axios.post(USERS_API , user);
+    return axios.post(USERS_API , user); 
 }
 
 export default {

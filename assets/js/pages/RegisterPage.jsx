@@ -6,6 +6,7 @@ import StylesApi from "../services/StylesApi";
 import InstrumentsApi from "../services/InstrumentsApi";
 import { toast } from "react-toastify";
 import FieldXp from "../components/forms/FieldXp";
+import { DynamicDrawUsage } from "three";
 
 const RegisterPage = ({ history }) => {
   const [styles, setStyles] = useState([]);
