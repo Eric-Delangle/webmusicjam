@@ -3,7 +3,7 @@ import Cache from "./Cache";
 import { STYLES_API } from "../config";
 
 async function findAll () {
-
+console.log("haha");
     const cachedStyles = await Cache.get("styles");
     if(cachedStyles) return cachedStyles;
     return axios 

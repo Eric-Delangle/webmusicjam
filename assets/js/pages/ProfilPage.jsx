@@ -44,54 +44,43 @@ const ProfilPage = (props) => {
         fetchUser(userid);
     }, []);
 
-    console.log(user.style);
-    console.log(user.instrument);
-    console.log(user);
     return (
         <>
-
+<div className="container text-center">
             <h1>Profil de {user.firstName} {user.lastName}</h1>
-            <table className="table table-hover">
-                <tbody>
-                    <tr className="table-primary">
-                        <th scope="col">Année(s) de pratique:</th>
-                        <td>{user.experience}</td>
-                    </tr>
-                    <tr className="table-primary">
+           
+                        <h3 className="mt-3">Année(s) de pratique:</h3>
+                        <p>{user.experience}</p>
+              
 
-                        <th scope="col">email:</th>
-                        <td>{user.email}</td>
+                        <h3>email:</h3>
+                        {user.email}
 
-                    </tr>
-                    <tr className="table-primary">
-                        <th scope="col">Ville:</th>
-                        <td >{user.city}</td>
-                    </tr>
-                    <tr className="table-primary">
-                        <th scope="col">Style(s):</th>
+                
+                        <h3>Ville:</h3>
+                        <p >{user.city}</p>
+                    
+                        <h3>Style(s):</h3>
                         {user.style && user.style.map(genre =>
-                            <td key={genre.id}>
+                            <p key={genre.id}>
                                 {genre.name}
-                            </td>
+                            </p>
                         )}
-                    </tr>
-                    <tr className="table-primary">
-                        <th scope="col">Instrument(s):</th>
+                   
+                 
+                        <h3>Instrument(s):</h3>
                         {user.instrument && user.instrument.map(instru =>
-                            <td key={instru.id}>
+                            <p key={instru.id}>
                                 {instru.name}
-                            </td>
+                            </p>
                         )}
-                    </tr>
-                    <td>
+                   
                         <a className="btn btn-sm btn-info">
                             Contacter
-                                    </a></td>
+                                    </a>
 
-
-                </tbody>
-            </table>
-
+                                    </div>
+           
         </>
     );
 }

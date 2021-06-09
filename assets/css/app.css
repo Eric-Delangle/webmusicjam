@@ -11,6 +11,11 @@ body {
   color: #000000;
 }
 
+.titre_background {
+  background-color: #bf8449;
+  border-radius: 20px;
+}
+
 label,
 .titre {
   width: 400px;

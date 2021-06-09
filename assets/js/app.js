@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { HashRouter, Switch, Route, withRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MembersListPage from './pages/MembersListPage';
+import StylesPage from './pages/StylesPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ProfilPage from './pages/ProfilPage';
@@ -151,11 +152,12 @@ const App = () => {
                 <NavbarWithRouter />
                 <main className="container pt-5">
                     <Switch>
-                        <Route path="/login"  component= { LoginPage }/>
-                        <Route path="/register"  component= { RegisterPage }/>
-                        <PrivateRoute path="/member" component = { MemberPage }/>
+                        <Route path="/login"  component= {LoginPage}/>
+                        <Route path="/register"  component= {RegisterPage}/>
+                        <PrivateRoute path="/member" component = {MemberPage}/>
                         <Route path="/users/:id" component={ProfilPage} />
                         <Route path="/membersList" component={MembersListPage} />
+                        <Route path="/styles" component={StylesPage} />
                          <Route path="/" component={HomePage} />
                     </Switch>
                 </main>

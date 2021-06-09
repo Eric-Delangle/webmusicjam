@@ -26,13 +26,13 @@ const Navbar = ({ history }) => {
                         <NavLink to="/membersList" className="btn btn-primary">Liste des membres</NavLink>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Chercher par styles</a>
+                        <NavLink to="/styles" className="btn btn-primary">Chercher par styles</NavLink>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Chercher par instruments</a>
+                        <a className="nav-link" href="/instruments">Chercher par instruments</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Chercher par niveau d'experience</a>
+                        <a className="nav-link" href="/experience">Chercher par niveau d'experience</a>
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
-  /**
+/**
  * @ORM\Entity(repositoryClass=StyleRepository::class)
  *  @ApiResource(
  *  attributes={
@@ -52,7 +52,7 @@ class Style
     {
         $this->user = new ArrayCollection();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,7 +73,7 @@ class Style
     /**
      * @return Collection|User[]
      */
-    public function getUser():  Collection
+    public function getUser(): Collection
     {
         return $this->user;
     }
@@ -82,7 +82,7 @@ class Style
      * Set the value of user
      *
      * @return  self
-     */ 
+     */
     public function setUser($user)
     {
         $this->user = $user;
@@ -90,7 +90,8 @@ class Style
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return (string) $this->getName();
     }
 }
