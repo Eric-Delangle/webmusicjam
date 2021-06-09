@@ -7,6 +7,10 @@ body {
   width: 100%;
 }
 
+.pad {
+  padding: 15px;
+}
+
 .noir {
   color: #000000;
 }
