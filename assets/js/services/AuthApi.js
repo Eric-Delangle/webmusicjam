@@ -15,10 +15,12 @@ function logout() {
  * @param {object} credentials 
  */
 function authenticate (credentials) {
-  console.log(credentials);
+  console.log(credentials.password);
+
     return  axios.post(LOGIN_API, credentials)
      .then(response => response.data.token)
      .then( token => {
+       console.log(credentials.password);
       // Je stocke le token dans mon localStorage
       window.localStorage.setItem("authToken", token);
       // On previent axios qu'on a maintenant un header par defaut sur toutes nos futures requetes HTTP.

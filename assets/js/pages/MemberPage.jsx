@@ -63,7 +63,7 @@ const MemberPage = (props) => {
 
                     <tr className="table-primary">
                         {user.style && user.style.map(item=>
-                            <td key={item.id}>{item.name}</td>
+                            <td key={item.id}>{item.name} {console.log(item)}</td>
                         )}
                           {user.instrument&& user.instrument.map(item=>
                             <td key={item.id}>{item.name}</td>
