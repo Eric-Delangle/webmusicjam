@@ -1,0 +1,15 @@
+Commandes pour gerer les images dockers mysql et phpmyadmin:
+
+Lancer les images: docker-compose up -d
+
+Stopper les images: docker-compose stop
+
+Savoir quelles images sont lancées dans le container: docker ps
+
+
+jeton d'accès : glpat-MBVm56jzJebBiCyoC_ZE
+
+je ne peux push qu'en passant par hyper:
+
+nom d'utilisateur: copeauxdecouleurs
+mdp: junfanpol76
